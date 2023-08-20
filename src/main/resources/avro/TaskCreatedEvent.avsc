@@ -1,0 +1,36 @@
+{
+  "type": "record",
+  "name": "TaskCreatedEvent",
+  "namespace": "com.avro.events.streaming",
+  "fields": [
+    {
+      "name": "id",
+      "type": "long"
+    },
+    {
+      "name": "userId",
+      "type": "long"
+    },
+    {
+      "name": "taskStatus",
+      "type": "string"
+    },
+    {
+      "name": "amountOfMoneyToCharge",
+      "type": {
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 5,
+        "scale": 2
+      }
+    },
+    {
+      "name": "title",
+      "type": "string"
+    },
+    {
+      "name": "jiraId",
+      "type": "long"
+    }
+  ]
+}
