@@ -1,0 +1,24 @@
+spring:
+  #Kafka config
+  kafka:
+    producer:
+      bootstrap-servers: http://localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: accounting-service
+      bootstrap-servers: http://localhost:9092
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    security:
+      protocol: PLAINTEXT
+    topics:
+      user-saved-topic: user-saved
+      task-created-topic: task-created
+      task-updated-topic: task-updated
+    properties:
+      schema:
+        registry:
+          url: http://localhost:9898
+    bootstrap-servers: http://localhost:9092
