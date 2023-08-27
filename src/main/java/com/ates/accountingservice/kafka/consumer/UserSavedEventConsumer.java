@@ -3,6 +3,7 @@ package com.ates.accountingservice.kafka.consumer;
 import static com.ates.accountingservice.utils.MdcUtils.CORRELATION_ID;
 import static com.ates.accountingservice.utils.MdcUtils.setCorrelationId;
 
+import com.ates.accountingservice.service.AccountingService;
 import com.avro.events.streaming.UserSavedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserSavedEventConsumer {
 
+  private final AccountingService accountingService;
+
   @KafkaListener(
       topics = "${spring.kafka.topics.user-saved-topic}",
       groupId = "${spring.kafka.consumer.group-id}"
@@ -27,11 +30,6 @@ public class UserSavedEventConsumer {
     setCorrelationId(customHeader);
     log.info("Received UserSavedEvent: {}", event);
 
-    //accountFacade.on(event);
-
-    //will create new account with empty balance for newly created user
-    //will create user cud entity and wire it with account entity
-
-    //need to implement producer of AccountCreatedEvent (no time for this)
+    accountingService.on(event);
   }
 }

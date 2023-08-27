@@ -3,6 +3,7 @@ package com.ates.accountingservice.kafka.consumer;
 import static com.ates.accountingservice.utils.MdcUtils.CORRELATION_ID;
 import static com.ates.accountingservice.utils.MdcUtils.setCorrelationId;
 
+import com.ates.accountingservice.service.AuditLogItemService;
 import com.avro.events.streaming.TaskUpdatedEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class TaskUpdatedEventConsumer {
 
+  private final AuditLogItemService auditLogItemService;
+
   @KafkaListener(
       topics = "${spring.kafka.topics.task-updated-topic}",
       groupId = "${spring.kafka.consumer.group-id}"
@@ -27,11 +30,6 @@ public class TaskUpdatedEventConsumer {
     setCorrelationId(customHeader);
     log.info("Received TaskUpdatedEvent: {}", event);
 
-    //someService.on(event);
-
-    //will find corresponding task by taskID
-    //will update data related to the amount of money to pay + we will increase account balance
-
-    //need to implement producer of AuditLogItemUpdated (no time for this)
+    auditLogItemService.on(event);
   }
 }

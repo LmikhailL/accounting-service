@@ -40,4 +40,17 @@ public class AccountEntity {
 
   @OneToMany(mappedBy = "accountEntity")
   private List<AuditLogItemEntity> auditLogItems = new ArrayList<>();
+
+  public void addAuditLogItemEntity(AuditLogItemEntity entity) {
+    this.auditLogItems.add(entity);
+    entity.setAccountEntity(this);
+  }
+
+  public void decreaseBalanceBy(BigDecimal by) {
+    this.balance = this.balance.subtract(by);
+  }
+
+  public void increaseBalanceBy(BigDecimal by) {
+    this.balance = this.balance.add(by);
+  }
 }

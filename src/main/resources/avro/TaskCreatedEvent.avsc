@@ -9,7 +9,7 @@
     },
     {
       "name": "userId",
-      "type": "long"
+      "type": "string"
     },
     {
       "name": "taskStatus",
@@ -26,6 +26,10 @@
     },
     {
       "name": "title",
+      "type": "string"
+    },
+    {
+      "name": "description",
       "type": "string"
     },
     {

@@ -37,5 +37,5 @@ public class TaskCudEntity {
   private String title;
 
   @Column(name = "jira_id")
-  private String jiraId;
+  private Long jiraId;
 }

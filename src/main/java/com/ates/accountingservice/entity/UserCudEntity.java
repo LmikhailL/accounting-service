@@ -20,7 +20,6 @@ public class UserCudEntity {
 
   @Id
   @Column(name = "id")
-  @GeneratedValue(strategy = IDENTITY)
   private Long id;
 
   @Column(name = "user_keycloak_id")
@@ -31,6 +30,9 @@ public class UserCudEntity {
 
   @Column(name = "last_name")
   private String lastName;
+
+  @Column(name = "email")
+  private String email;
 
   @Column(name = "role")
   private String role;
